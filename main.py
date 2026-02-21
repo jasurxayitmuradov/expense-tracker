@@ -4,6 +4,7 @@ import os
 from datetime import datetime 
 from rich.console import Console 
 from rich.table import Table 
+from rich import print
 #the data stucture
 '''
 {
@@ -87,7 +88,32 @@ def list_expenses():
 
     
 def summary(month=None):
-    pass
+
+    total_expenses = 0
+
+    try:
+        with open("data.json" , 'r') as f:
+            expenses = json.load(f)
+    except FileNotFoundError or json.JSONDecodeError:
+        print("[red]You don't have any expenses!.[/red]")
+        return
+    
+    if month == None:
+        for expense in expenses:
+            total_expenses+=expense['amount']
+    elif month <=12 and month >=1:
+        for expense in expenses:
+            if int(expense['date'][5:7]) == month:
+                total_expenses+=expense['amount']
+    else:
+        print("[red]We have only 12 months![/red]")
+        return
+    
+    if total_expenses:
+        print(f"Total expenses: [bold green]${total_expenses}[/bold green]")
+    else:
+        print("[red]You don't have any expenses!.[/red]")
+        
 def delete(id):
     pass
 
@@ -124,10 +150,12 @@ def main():
     elif args.command=="list":
         list_expenses()
     elif args.command=="summary":
-        if args.month:
-            print("This is a specific summary!")
-            print(args.month)
-        print("Summary is working!")
+
+        if not args.month:
+            summary()
+        else:
+            summary(args.month)
+
     elif args.command=="delete":
         print("delet %s" % args.id)
     else:           
