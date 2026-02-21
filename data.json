@@ -10,5 +10,11 @@
         "date": "2026-02-21 23:23",
         "description": "salom",
         "amount": 24.0
+    },
+    {
+        "id": 3,
+        "date": "2026-02-22 00:30",
+        "description": "asds",
+        "amount": 20.3
     }
 ]

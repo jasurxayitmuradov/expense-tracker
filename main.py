@@ -2,6 +2,8 @@ import argparse
 import json
 import os
 from datetime import datetime 
+from rich.console import Console 
+from rich.table import Table 
 #the data stucture
 '''
 {
@@ -60,8 +62,30 @@ def add(description , amount):
     print(f"Expense added successfully (ID: {id})")
     
 
-def list():
-    pass
+def list_expenses():
+    try:
+        with open('data.json' , 'r') as f:
+            expenses = json.load(f)
+    except FileNotFoundError or json.JSONDecodeError:
+        print("[red]You don't have any expenses!.[/red]")
+        return
+        
+    console = Console()
+
+    table = Table(title="Table of expenses" , show_header=True , header_style="bold magenta")
+
+    table.add_column("ID" , style='dim' , width=6)
+    table.add_column("Date" , justify='center')
+    table.add_column("Description" , min_width=20 ,  justify='center')
+    table.add_column("Amount" , justify="right" , style='green')
+
+    for expense in expenses:
+        table.add_row(str(expense['id']) , expense['date'] , expense['description'] , str(expense['amount']))
+
+    console.print(table)
+
+
+    
 def summary(month=None):
     pass
 def delete(id):
@@ -98,7 +122,7 @@ def main():
     if args.command=='add':
         add(args.description , args.amount)
     elif args.command=="list":
-        print("Print is working!")
+        list_expenses()
     elif args.command=="summary":
         if args.month:
             print("This is a specific summary!")
