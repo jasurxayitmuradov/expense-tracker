@@ -10,6 +10,10 @@ A simple and efficient Command Line Interface (CLI) application built with Pytho
 * **Error Handling:** Robust management of missing files and invalid JSON data.
 * **Developer Friendly:** Clean project structure with `.gitignore` and `requirements.txt`.
 ```
+
+## 📸 Preview
+![Expense Tracker Table](https://github.com/user-attachments/assets/419fe132-9b8c-4497-9e49-5799bf2631e8)
+---
 ## 🚀 Installation
 
 1. **Clone the repository:**
