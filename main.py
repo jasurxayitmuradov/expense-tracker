@@ -115,8 +115,23 @@ def summary(month=None):
         print("[red]You don't have any expenses!.[/red]")
         
 def delete(id):
-    pass
 
+    deleted_expenses = []
+    try:
+        with open("data.json" , 'r') as f:
+            expenses = json.load(f)
+    except FileNotFoundError or json.JSONDecodeError:
+        print("[red]You don't have any expenses!.[/red]")
+        return
+    
+    for expense in expenses:
+        if expense['id'] != id:
+            deleted_expenses.append(expense)
+
+    with open("data.json" , "w") as f:
+        json.dump(deleted_expenses , f  , indent=4)
+
+    print("[green]Expense deleted successfully[/green]")
 
 
 def main():
@@ -157,7 +172,7 @@ def main():
             summary(args.month)
 
     elif args.command=="delete":
-        print("delet %s" % args.id)
+        delete(args.id)
     else:           
         parser.print_help()
 
