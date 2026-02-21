@@ -13,11 +13,12 @@ A simple and efficient Command Line Interface (CLI) application built with Pytho
 ## 🚀 Installation
 
 1. **Clone the repository:**
+
+
    ```bash
    git clone [https://github.com/jasurxayitmuradov/expense-tracker.git](https://github.com/jasurxayitmuradov/expense-tracker.git)
    cd expense-tracker
-```
-```
+
 
 2. **Set up a virtual environment:**
 ```bash
